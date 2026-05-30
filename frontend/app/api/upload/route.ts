@@ -10,13 +10,14 @@ export async function POST(request: NextRequest) {
 
     const videoId = Math.random().toString(36).substring(2, 10)
 
-    const duration = 120.5
-    const transcript = "Welcome to this video. In this presentation we will cover the key concepts and important topics. This content is designed to help you understand the material better and apply it in real world scenarios."
+    const duration = Math.max(72, Math.min(480, Math.round(file.size / 42000)))
+    const transcript = "Welcome to this video. The speaker introduces the main topic, compares important points, explains supporting examples, and ends with a clear set of takeaways. The system indexes transcript segments, visual moments, and semantic topics so the viewer can search and ask questions without watching the full video."
     const segments = [
-      { start: 0, end: 5, text: "Welcome to this video." },
-      { start: 5, end: 15, text: "In this presentation we will cover the key concepts and important topics." },
-      { start: 15, end: 25, text: "This content is designed to help you understand the material better." },
-      { start: 25, end: 35, text: "And apply it in real world scenarios." },
+      { start: 0, end: 12, text: "Opening context and topic introduction." },
+      { start: 12, end: 34, text: "Key comparison points and supporting evidence are discussed." },
+      { start: 34, end: 58, text: "Important visual examples and transitions appear on screen." },
+      { start: 58, end: 82, text: "Practical implications and recommendations are explained." },
+      { start: 82, end: 110, text: "Final summary and conclusion with takeaways." },
     ]
     const frameCount = Math.floor(duration / 2)
     const timeline = []
@@ -25,6 +26,17 @@ export async function POST(request: NextRequest) {
       timeline.push({ time: segments[i].start + 1, content: `Visual scene change detected at ${segments[i].start.toFixed(1)}s`, type: "visual" })
     }
     timeline.sort((a, b) => a.time - b.time)
+    const highlights = [
+      "Topic introduction and framing",
+      "Main comparison or evidence section",
+      "Most useful practical takeaway",
+      "Final verdict / conclusion",
+    ]
+    const keyframes = [0, 15, 35, 60, 90].filter((time) => time < duration).map((time, index) => ({
+      time,
+      label: `Keyframe ${index + 1}`,
+      description: index === 0 ? "Opening scene" : index === 1 ? "Core topic appears" : index === 2 ? "Visual evidence section" : index === 3 ? "Recommendation moment" : "Closing section",
+    }))
 
     return NextResponse.json({
       video_id: videoId,
@@ -35,6 +47,14 @@ export async function POST(request: NextRequest) {
       transcript,
       segments,
       timeline,
+      highlights,
+      keyframes,
+      model_status: {
+        ffmpeg: "Vercel demo mode",
+        whisper: "Simulated transcript",
+        vector_db: "In-memory semantic index",
+        multimodal: "Timeline QA demo",
+      },
       summary: timeline.map(t => `[${t.time.toFixed(1)}s] (${t.type}): ${t.content}`).join("\n"),
     })
   } catch (error) {

@@ -3,11 +3,12 @@
 import { useCallback, useRef } from "react"
 
 interface Props {
+  onUploadStart: () => void
   onUploadComplete: (data: any) => void
   onUploadError: (err: string) => void
 }
 
-export default function VideoUploader({ onUploadComplete, onUploadError }: Props) {
+export default function VideoUploader({ onUploadStart, onUploadComplete, onUploadError }: Props) {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleUpload = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,6 +19,7 @@ export default function VideoUploader({ onUploadComplete, onUploadError }: Props
     formData.append("file", file)
 
     try {
+      onUploadStart()
       const res = await fetch("/api/upload", { method: "POST", body: formData })
       if (!res.ok) {
         const err = await res.json()
@@ -28,7 +30,7 @@ export default function VideoUploader({ onUploadComplete, onUploadError }: Props
     } catch (err: any) {
       onUploadError(err.message || "Upload failed. Please try again.")
     }
-  }, [onUploadComplete, onUploadError])
+  }, [onUploadStart, onUploadComplete, onUploadError])
 
   return (
     <div className="border-2 border-dashed border-gray-600 rounded-2xl p-12 text-center hover:border-blue-500 transition cursor-pointer"

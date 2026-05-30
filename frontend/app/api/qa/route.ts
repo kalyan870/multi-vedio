@@ -11,6 +11,9 @@ const qaData: QAItem[] = [
   { keywords: ["understand", "learn", "material", "content", "designed"], answer: "The content is designed to help viewers understand the material better through clear explanations and practical examples." },
   { keywords: ["apply", "real world", "scenario", "practical", "use"], answer: "The video emphasizes applying the learned concepts in real-world scenarios for better retention and practical skills." },
   { keywords: ["duration", "long", "length", "time", "minute"], answer: "The video covers its content in a well-structured format with clear sections and transitions between topics." },
+  { keywords: ["summary", "summarize", "short", "brief"], answer: "The video introduces a topic, explains the key points with supporting visual context, then closes with practical takeaways." },
+  { keywords: ["highlight", "important", "moment", "best"], answer: "The most important moments are the introduction, main evidence section, practical recommendation, and final conclusion." },
+  { keywords: ["visual", "frame", "scene", "show"], answer: "The visual track is indexed as keyframes and scene moments so users can jump to relevant timestamps." },
 ]
 
 export async function POST(request: NextRequest) {
