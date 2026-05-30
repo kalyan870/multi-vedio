@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: multimodel-vedio-backend
+    env: docker
+    repo: https://github.com/kalyan870/multimodel-vedio
+    dockerfilePath: ./backend/Dockerfile
+    healthCheckPath: /docs
+    envVars:
+      - key: PORT
+        value: "8000"
