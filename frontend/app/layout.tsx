@@ -1,7 +1,7 @@
 import "./globals.css"
 
 export const metadata = {
-  title: "MultiModel Video",
+  title: "Multi Video",
   description: "Multimodal Video QA & Summariser",
 }
 
