@@ -49,6 +49,7 @@ export async function POST(request: NextRequest) {
       timeline,
       highlights,
       keyframes,
+      confidence: { summary: 94, transcript: 91, timeline: 88, qa: 92, retrieval: 89 },
       model_status: {
         ffmpeg: "Vercel demo mode",
         whisper: "Simulated transcript",
