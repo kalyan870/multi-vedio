@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server"
-import { writeFile, mkdir } from "fs/promises"
-import { join } from "path"
 
 export async function POST(request: NextRequest) {
   try {
@@ -10,13 +8,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "No file provided" }, { status: 400 })
     }
 
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
     const videoId = Math.random().toString(36).substring(2, 10)
-    const uploadDir = join(process.cwd(), "public", "uploads")
-    await mkdir(uploadDir, { recursive: true })
-    const filePath = join(uploadDir, file.name)
-    await writeFile(filePath, buffer)
 
     const duration = 120.5
     const transcript = "Welcome to this video. In this presentation we will cover the key concepts and important topics. This content is designed to help you understand the material better and apply it in real world scenarios."
@@ -47,6 +39,6 @@ export async function POST(request: NextRequest) {
     })
   } catch (error) {
     console.error("Upload error:", error)
-    return NextResponse.json({ error: "Upload failed. Make sure the backend server is running." }, { status: 500 })
+    return NextResponse.json({ error: "Upload failed inside the Vercel API route." }, { status: 500 })
   }
 }

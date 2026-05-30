@@ -24,7 +24,7 @@ export default function VideoUploader({ onUploadComplete, onUploadError }: Props
         throw new Error(err.error || "Upload failed")
       }
       const data = await res.json()
-      onUploadComplete(data)
+      onUploadComplete({ ...data, previewUrl: URL.createObjectURL(file) })
     } catch (err: any) {
       onUploadError(err.message || "Upload failed. Please try again.")
     }

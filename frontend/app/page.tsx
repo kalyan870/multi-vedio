@@ -10,6 +10,7 @@ import SummaryCard from "../components/SummaryCard"
 interface VideoData {
   video_id: string
   filename: string
+  previewUrl?: string
   duration: number
   transcript: string
   segments: { start: number; end: number; text: string }[]
@@ -59,7 +60,7 @@ export default function Home() {
       {videoData && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 space-y-6">
-            <VideoPlayer filename={videoData.filename} />
+            <VideoPlayer filename={videoData.filename} previewUrl={videoData.previewUrl} />
             <SummaryCard
               transcript={videoData.transcript}
               frameCount={videoData.frame_count}
