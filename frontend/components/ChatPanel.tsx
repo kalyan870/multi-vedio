@@ -16,15 +16,14 @@ export default function ChatPanel({ videoId }: Props) {
     setLoading(true)
     setAnswer("")
     try {
-      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000"
       const formData = new FormData()
       formData.append("video_id", videoId)
       formData.append("question", question)
-      const res = await fetch(`${API_URL}/api/qa`, { method: "POST", body: formData })
+      const res = await fetch("/api/qa", { method: "POST", body: formData })
       const data = await res.json()
       setAnswer(data.context || "No answer found.")
     } catch {
-      setAnswer("Error connecting to backend.")
+      setAnswer("Error processing question.")
     } finally {
       setLoading(false)
     }

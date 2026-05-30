@@ -21,9 +21,16 @@ interface VideoData {
 export default function Home() {
   const [videoData, setVideoData] = useState<VideoData | null>(null)
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
 
   const handleUploadComplete = useCallback((data: VideoData) => {
     setVideoData(data)
+    setLoading(false)
+    setError("")
+  }, [])
+
+  const handleUploadError = useCallback((err: string) => {
+    setError(err)
     setLoading(false)
   }, [])
 
@@ -37,15 +44,17 @@ export default function Home() {
       </header>
 
       {!videoData && !loading && (
-        <VideoUploader onUploadComplete={handleUploadComplete} onUploadStart={() => setLoading(true)} />
+        <VideoUploader onUploadComplete={handleUploadComplete} onUploadError={handleUploadError} />
       )}
 
       {loading && (
         <div className="flex flex-col items-center justify-center py-20">
           <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
-          <p className="mt-4 text-gray-400">Processing video... This may take a few minutes.</p>
+          <p className="mt-4 text-gray-400">Processing video...</p>
         </div>
       )}
+
+      {error && <p className="text-red-400 text-center mt-4">{error}</p>}
 
       {videoData && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
