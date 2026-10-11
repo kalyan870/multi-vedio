@@ -111,7 +111,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto p-4 md:p-8">
       <header className="mb-8 flex flex-col gap-4 text-center md:flex-row md:items-center md:justify-between md:text-left">
         <div>
-        <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-5xl font-bold bg-linear-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
           Multi Video
         </h1>
         <p className="text-gray-400 mt-2">Multimodal Video QA & Summariser</p>
@@ -187,7 +187,7 @@ export default function Home() {
                   <div key={frame.time} onClick={() => seekTo(frame.time)}
                     className="rounded-xl border border-cyan-300/20 bg-black/30 p-4 cursor-pointer hover:border-cyan-300/50 transition"
                   >
-                    <div className={`mb-3 h-24 rounded-lg bg-gradient-to-br ${keyframeColors[i % keyframeColors.length]} flex items-center justify-center`}>
+                    <div className={`mb-3 h-24 rounded-lg bg-linear-to-br ${keyframeColors[i % keyframeColors.length]} flex items-center justify-center`}>
                       <span className="text-2xl font-bold text-white/40">{frame.time.toFixed(0)}s</span>
                     </div>
                     <p className="text-sm font-semibold text-cyan-200">{frame.label}</p>
