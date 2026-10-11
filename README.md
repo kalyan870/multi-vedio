@@ -2,7 +2,13 @@
 
 <p align="center"><strong>A Next.js interface prototype for uploading a video, viewing a timestamped study timeline, and asking questions about its contents.</strong></p>
 
-<p align="center">Next.js 14 · React · TypeScript · App Router</p>
+<p align="center">Next.js 15 · React · TypeScript · App Router</p>
+
+## Live demo
+
+[Open the Multi-Video Study Assistant prototype](https://multi-vedio.vercel.app/)
+
+This is a UI and API-route prototype. The routes return scripted sample results; they do not transcribe, summarize, or answer questions from uploaded video content.
 
 ## Project overview
 

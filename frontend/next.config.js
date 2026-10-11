@@ -1,8 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    serverComponentsExternalPackages: [],
-  },
+  outputFileTracingRoot: __dirname,
+  serverExternalPackages: [],
 }
 
 module.exports = nextConfig
