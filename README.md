@@ -20,6 +20,11 @@ The API responses are **scripted demo data**. The upload route does not decode t
 
 ## Architecture
 
+![multi-vedio architecture map](docs/images/multi-vedio-architecture.png)
+
+[Architecture notes](docs/architecture.md) · [Editable SVG](docs/images/multi-vedio-architecture.svg)
+
+
 ```mermaid
 flowchart LR
   U[User] --> N[Next.js UI]
